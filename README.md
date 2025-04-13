@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Valorant Agent Dashboard
 
-## Getting Started
+This is a web application built with Next.js and TypeScript that displays a list of Valorant agents. Users can filter agents by their roles (e.g., Duelist, Sentinel, etc.) using a dropdown menu. The app fetches data from the Valorant API and processes it to display all agents.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Agent Listing**: Displays a list of all Valorant agents with their names, roles, and icons.
+- **Role Filtering**: Allows users to filter agents by their roles using a dropdown menu.
+- **Dynamic Data Fetching**: Fetches agent data from the Valorant API and processes it to remove duplicates and non-playable characters.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Technologies Used
 
-## Learn More
+- **Next.js**: Framework for building the application.
+- **TypeScript**: For a better developer experience.
+- **React**: For building the UI components.
+- **CSS**: For styling the application.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Installation and Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository:
 
-## Deploy on Vercel
+   ```bash
+   git clone https://github.com/your-username/valorant-agent-dashboard.git
+   cd valorant-agent-dashboard
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Install Dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to:
+   `http://localhost:3000`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## How It Works
+
+1.  **Data Fetching** <br>
+    The app fetches agent data from the Valorant API using the API route defined in `app/api/agents/route.ts.` The data is filtered to include only playable characters and remove duplicates using the filter `isPlayableCharacter=true`.
+
+2.  **Role Filtering** <br>
+    The `RoleFilter` component in `app/components/RoleFilter.tsx`:
+
+    - Displays a dropdown menu with unique roles.
+    - Filters the list of agents based on the selected role.
+
+3.  **TypeScript Interfaces** <br>
+    The `app/types/valorant.ts` file defines the structure of the data:
+
+    - `ValorantAgent`: Represents an agent with properties like `uuid`, `displayName`, `role`, etc.
+    - `ValorantApiResponse`: Represents the structure of the API response.
+
+---
+
+## Acknowledgments
+
+- [Valorant API](https://valorant-api.com/) for providing the agent data.
+- The Riot Games team for creating Valorant.
