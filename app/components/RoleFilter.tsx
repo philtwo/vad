@@ -25,6 +25,7 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
             src={hoveredAgent.fullPortrait}
             alt={hoveredAgent.displayName}
             id="full-portrait"
+            loading='lazy'
           />
         )}
       </div>
