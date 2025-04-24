@@ -9,6 +9,7 @@ export interface ValorantAgent {
     displayName: string;
     description: string;
     displayIcon: string;
+    fullPortait: string;
   };
   isPlayableCharacter: boolean;
 }

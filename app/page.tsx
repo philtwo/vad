@@ -2,7 +2,7 @@ import { ValorantAgent } from './types/valorant';
 import RoleFilter from './components/RoleFilter';
 
 async function getAgents(): Promise<ValorantAgent[]> {
-  const res = await fetch('https://valorant-api.com/v1/agents', { cache: 'no-store' });
+  const res = await fetch('https://valorant-api.com/v1/agents', {cache: 'no-store'});
   const data = await res.json();
   
   return data.data

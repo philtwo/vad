@@ -31,8 +31,13 @@ h1{
   font-weight: 100;
 }
 
+h3 {
+  z-index: 2;
+}
+
 p{
   font-family: monospace;
+  z-index: 2;
 }
 
 .filter{
@@ -41,15 +46,16 @@ p{
 
 #agents-list{
   list-style: none;
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 #agents-list li{
-  list-style: none;
   background-color: #4d2c2c;
   width: 160px;
+  height: auto;
   padding: 20px;
   margin: 20px;
   border-radius: 15px;
@@ -57,4 +63,22 @@ p{
 
 #agents-list li:hover{
   background-color: #3d1c1c;
+}
+
+#full-portrait-container {
+  position: fixed;
+  left: 50px;
+  top: 230px;
+  width: 300px;
+  height: 400px;
+  margin-right: 20px;
+  background-color: #251818;
+  border: 3px solid #4d2c2c;
+  border-radius: 10px;
+}
+
+#full-portrait {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
