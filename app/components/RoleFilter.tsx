@@ -21,12 +21,16 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
       {/* Left side for full portrait */}
       <div id="full-portrait-container">
         {hoveredAgent && (
-          <img
-            src={hoveredAgent.fullPortrait}
-            alt={hoveredAgent.displayName}
-            id="full-portrait"
-            loading='lazy'
-          />
+          <div>
+            <img
+              src={hoveredAgent.fullPortrait}
+              alt={hoveredAgent.displayName}
+              id="full-portrait"
+              loading='lazy'
+            />
+            <h3>{hoveredAgent.displayName}</h3>
+            <p>{hoveredAgent.role.displayName}</p>
+          </div>
         )}
       </div>
 
