@@ -25,6 +25,18 @@
   inherits: false;
 }
 
+@property --color-3 {
+  syntax: '<color>';
+  initial-value: rgba(74, 84, 92, 0.5);
+  inherits: false;
+}
+
+@property --color-4 {
+  syntax: '<color>';
+  initial-value: rgba(48, 5, 5, 0.5);
+  inherits: false;
+}
+
 select{
   font-family: monospace;
   width: 200px;
@@ -60,7 +72,17 @@ p{
   z-index: 2;
 }
 
+hr {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-3);
+  border: none;
+}
 
+footer {
+  width: 1280px;
+  height: 10vh;
+}
 
 #agents-list{
   list-style: none;
@@ -87,28 +109,79 @@ p{
   scale: 1.05;
 }
 
+#agents-list li:active{
+  --color-1: rgba(1, 60, 107, 0.5);
+  --color-2: rgba(174, 176, 184, 0.5);
+}
+
+#roleIcon {
+  display: grid;
+  width: 2vh;
+  height: 2vh;
+}
+
+#agent-desc {
+  padding: 5px;
+  text-align: center;
+}
+
 #full-portrait-container {
   display: none;
 }
 
+#selected-agent {
+  margin-top: 5vh;
+}
+
+#abilities-list {
+  list-style: none;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  margin: 0;
+  padding: 10px;
+}
+
 @media all and (min-width: 1920px) {
   #full-portrait-container {
-    display: block;
-    position: fixed;
+    display: flex;
+    position: absolute;
     left: 50px;
-    top: 230px;
+    top: 195px;
     width: 300px;
-    height: 400px;
+    min-height: 400px;
     margin-right: 20px;
-    background-image:linear-gradient(135deg, var(--color-2), var(--color-1));
-    border: 3px solid var(--color-1);
+    background-image:linear-gradient(135deg, var(--color-4), var(--color-3));
+    border: 3px solid var(--color-3);
     backdrop-filter: blur(5px);
-    border-radius: 10px;
+    border-radius: 15px;
   }
 }
 
+#display-icon { 
+  width: 10vh;
+  height: 10vh;
+}
+
 #full-portrait {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  position: absolute;
+  left:90vh;
+  top: -30vh;
+  width: 200vh;
+  height: 200vh;
+}
+
+#valorant-api {
+  background-color: var(--color-4);
+  border-radius: 15px;
+  padding: 2px 5px;
+  text-decoration: none;
+  color: white;
+}
+
+#valorant-api:hover {
+  background-color: var(--color-3);
+  color: rgb(119, 15, 15);
 }

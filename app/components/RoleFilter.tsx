@@ -21,20 +21,41 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
       {/* Left side for full portrait */}
       <div id="full-portrait-container">
         {hoveredAgent && (
-          <div>
+          <div id="selected-agent">
+            <img
+              src={hoveredAgent.displayIcon}
+              alt={hoveredAgent.displayName}
+              id="display-icon"
+              loading='lazy'
+            />
+            <h3>{hoveredAgent.displayName}</h3>
+            <p id='agent-desc'>{hoveredAgent.description}</p>
+            <hr />
+            <h4>Abilities:</h4>
+            <ul id="abilities-list">
+              {hoveredAgent.abilities.map(ability => (
+                <li key={ability.slot}>
+                  <img
+                    src={ability.displayIcon}
+                    width="50"
+                    loading='lazy'
+                  />
+                  <h4>{ability.displayName}</h4>
+                  <p>{ability.description}</p>
+                </li>
+              ))}
+            </ul>
+            {/* full portait to the right test */}
             <img
               src={hoveredAgent.fullPortrait}
               alt={hoveredAgent.displayName}
               id="full-portrait"
-              loading='lazy'
-            />
-            <h3>{hoveredAgent.displayName}</h3>
-            <p>{hoveredAgent.role.displayName}</p>
+              loading='lazy'/>
           </div>
         )}
       </div>
 
-      {/* Right side for agent list */}
+      {/* agent select list */}
       <div>
         <label className="filter" htmlFor="role-select">Filter by Role: </label>
         <select
@@ -50,9 +71,10 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
           {filteredAgents.map(agent => (
             <li
               key={agent.uuid}
-              onMouseEnter={() => setHoveredAgent(agent)} // Set hovered agent
-              onMouseLeave={() => setHoveredAgent(null)} // Clear hovered agent
+              onClick={() => setHoveredAgent(agent)} // Set picked agent
+              // onMouseLeave={() => setHoveredAgent(null)} // Clear picked agent
             >
+              <img id="roleIcon" src={agent.role.displayIcon}/>
               <img
                 id="display-icon"
                 src={agent.displayIcon}

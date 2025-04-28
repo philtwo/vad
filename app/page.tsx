@@ -2,7 +2,7 @@ import { ValorantAgent } from './types/valorant';
 import RoleFilter from './components/RoleFilter';
 
 async function getAgents(): Promise<ValorantAgent[]> {
-  const res = await fetch('https://valorant-api.com/v1/agents', {cache: 'no-store'});
+  const res = await fetch('https://valorant-api.com/v1/agents');
   const data = await res.json();
   
   return data.data
@@ -17,9 +17,17 @@ export default async function Home() {
   const uniqueRoles = Array.from(new Set(agents.map(agent => agent.role.displayName)));
 
   return (
-    <main>
-      <h1>Valorant Agents</h1>
-      <RoleFilter agents={agents} uniqueRoles={uniqueRoles} />
-    </main>
+    <>
+      <main>
+        <h1>Valorant Agents</h1>
+        <RoleFilter agents={agents} uniqueRoles={uniqueRoles} />
+      </main>
+      <footer>
+        <br />
+        <p>Built with Next.js | React and the Valorant API</p>
+        <p>© 2025 Philip Jones. All rights reserved.</p>
+        <a id="valorant-api" href="https://valorant-api.com/" target="_blank" rel="noopener noreferrer">Valorant API</a>
+      </footer>
+    </>
   );
 }
