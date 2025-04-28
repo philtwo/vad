@@ -13,12 +13,11 @@ export interface ValorantAgent {
     displayIcon: string;
   };
   abilities: {
-    map(arg0: (ability: any) => JSX.Element): import("react").ReactNode;
     slot: string;
     displayName: string;
     description: string;
     displayIcon: string;
-  };
+  }[];
   isPlayableCharacter: boolean;
   
 }
