@@ -1,4 +1,3 @@
-import { JSX } from "react";
 
 export interface ValorantAgent {
   uuid: string;
@@ -19,7 +18,6 @@ export interface ValorantAgent {
     displayIcon: string;
   }[];
   isPlayableCharacter: boolean;
-  
 }
 
 export interface ValorantApiResponse {

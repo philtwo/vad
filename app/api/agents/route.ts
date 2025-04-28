@@ -3,7 +3,7 @@ import { ValorantApiResponse } from '@/app/types/valorant';
 
 export async function GET() {
   try {
-    const response = await fetch('https://valorant-api.com/v1/agents');
+    const response = await fetch('https://valorant-api.com/v1/agents', {cache: 'default'});
     const data: ValorantApiResponse = await response.json();
     
     // filter the duplicate sova out
