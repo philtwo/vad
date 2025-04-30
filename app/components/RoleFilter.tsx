@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { ValorantAgent } from '../types/valorant';
 import ImageWithPlaceholder from './ImageWithPlaceHolder';
-import { Icon } from "@iconify/react";
 import { LineMdCloseCircle } from './ExitButton';
 
 interface RoleFilterProps {
