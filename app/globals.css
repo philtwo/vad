@@ -1,40 +1,23 @@
 :root{
   max-width: 1280px;
   margin: 0 auto;
+  aspect-ratio: auto;
   padding: 2rem;
   text-align: center;
   background-image: url('../public/valorant_background.png');
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-position-x: center;
   background-position-y: top;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
+  height:auto;
   color: #FFFFFF;
   font-family: monospace;
 }
 
-/*color variables*/
-@property --color-1 {
-  syntax: '<color>';
-  initial-value: rgba(1, 60, 107, 0.5);
-  inherits: false;
-}
-@property --color-2 {
-  syntax: '<color>';
-  initial-value: rgba(174, 176, 184, 0.5);
-  inherits: false;
-}
-
-@property --color-3 {
-  syntax: '<color>';
-  initial-value: rgba(74, 84, 92, 0.5);
-  inherits: false;
-}
-
-@property --color-4 {
-  syntax: '<color>';
-  initial-value: rgba(48, 5, 5, 0.5);
-  inherits: false;
+html {
+  background-color: #0f1923;
 }
 
 select{
@@ -80,7 +63,8 @@ hr {
 }
 
 footer {
-  width: 1280px;
+  margin: 0 auto;
+  width: 100%;
   height: 10vh;
 }
 
@@ -116,13 +100,12 @@ footer {
 
 #roleIcon {
   display: grid;
-  width: 2vh;
-  height: 2vh;
+  width: 20px;
+  height: 20px;
 }
 
-#agent-desc {
-  padding: 5px;
-  text-align: center;
+#agent-dec-mobile {
+  display: none;
 }
 
 #full-portrait-container {
@@ -142,22 +125,6 @@ footer {
   justify-content: center;
   margin: 0;
   padding: 10px;
-}
-
-@media all and (min-width: 1920px) {
-  #full-portrait-container {
-    display: flex;
-    position: absolute;
-    left: 50px;
-    top: 195px;
-    width: 300px;
-    min-height: 400px;
-    margin-right: 20px;
-    background-image:linear-gradient(135deg, var(--color-4), var(--color-3));
-    border: 3px solid var(--color-3);
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
-  }
 }
 
 #display-icon { 
@@ -184,4 +151,236 @@ footer {
 #valorant-api:hover {
   background-color: var(--color-3);
   color: rgb(119, 15, 15);
+}
+
+#exit-button {
+  visibility: hidden;
+  position: fixed;
+}
+
+/*color variables*/
+@property --color-1 {
+  syntax: '<color>';
+  initial-value: rgba(1, 60, 107, 0.5);
+  inherits: false;
+}
+@property --color-2 {
+  syntax: '<color>';
+  initial-value: rgba(174, 176, 184, 0.5);
+  inherits: false;
+}
+
+@property --color-3 {
+  syntax: '<color>';
+  initial-value: rgba(74, 84, 92, 0.5);
+  inherits: false;
+}
+
+@property --color-4 {
+  syntax: '<color>';
+  initial-value: rgba(48, 5, 5, 0.5);
+  inherits: false;
+}
+
+@media all and (min-width: 1920px) {
+  #full-portrait-container {
+    display: flex;
+    position: absolute;
+    left: 50px;
+    top: 195px;
+    width: 300px;
+    min-height: 400px;
+    margin-right: 20px;
+    background-image:linear-gradient(135deg, var(--color-4), var(--color-3));
+    border: 3px solid var(--color-3);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+  }
+}
+
+/* Mobile styes */
+@media only screen and (max-width: 768px) {
+  :root{
+    z-index: -1;
+    touch-action: pan-y;
+    overflow-x: none;
+    width: 100vw;
+    height: auto;
+    background-image: url('../public/valorant_background_mobile.png');
+    height: 100vh;
+    width: 100vw;
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-position: center;
+    color: #FFFFFF;
+    background-color: #0f1923;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  select{
+    font-family: monospace;
+    width: 90vw;
+    height: 5vh;
+    border-radius: 8px;
+    background-color: var(--color-2);
+    color: #FFFFFF;
+    backdrop-filter: blur(5px);
+    transition: --color-1 0.2s, --color-2 0.2s;
+  }
+  
+  select:hover{
+    --color-1: rgba(174, 176, 184, 0.5);
+    --color-2: rgba(1, 60, 107, 0.5);
+  }
+  
+  img{
+    border-radius: 8px;
+  }
+  
+  h1{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 100;
+    margin: 6vw;
+  }
+  
+  h3 {
+    z-index: 2;
+  }
+  
+  p{
+    z-index: 2;
+  }
+  
+  hr {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-3);
+    border: none;
+  }
+
+  footer {
+    width: 100vw;
+    height: 10vh;
+  }
+
+  #agents-list{
+    width: 90vw;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 20px auto;
+  }
+  
+  #full-portrait {
+    display: none;
+  }
+
+  #agents-list li{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-image: linear-gradient(135deg, var(--color-2), var(--color-1));
+    min-width: 200px;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin: 0;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    transition: --color-1 0.2s, --color-2 0.2s, scale 0.1s;
+  }
+
+  #display-icon {
+    margin-left: 0;
+    flex-shrink: 0;
+    width: 10vh;
+    height: 10vh;
+  }
+
+  #agents-list li:hover{
+    --color-1: rgba(174, 176, 184, 0.5);
+    --color-2: rgba(1, 60, 107, 0.5);
+    scale: 1.05;
+  }
+  
+  #agents-list li:active{
+    --color-1: rgba(1, 60, 107, 0.5);
+    --color-2: rgba(174, 176, 184, 0.5);
+  }
+
+  #roleIcon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  #full-portrait-container {
+    display: none;
+  }
+  
+  #full-portrait-container.show {
+    position: fixed;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 10vw;
+    z-index: 998;
+    width: 80vw;
+    max-height: 70vh;
+    background-image:linear-gradient(135deg, var(--color-4), var(--color-3));
+    border: 3px solid var(--color-3);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+  }
+
+  #selected-agent {
+    margin: 0;
+    padding:0 2vw;
+  }
+
+  #exit-button {
+    visibility: visible;
+    position: sticky;
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    left: 1vw; /* new */
+    top: 1vh; /* new */
+    width: 24px;
+    height: 24px;
+  }
+
+  #abilities-list {
+    list-style: none;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #valorant-api {
+    background-color: var(--color-4);
+    border-radius: 15px;
+    padding: 2px 5px;
+    text-decoration: none;
+    color: white;
+  }
+  
+  #valorant-api:hover {
+    background-color: var(--color-3);
+    color: rgb(119, 15, 15);
+  }
 }

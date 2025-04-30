@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import { ValorantAgent } from '../types/valorant';
+import ImageWithPlaceholder from './ImageWithPlaceHolder';
+import { Icon } from "@iconify/react";
+import { LineMdCloseCircle } from './ExitButton';
 
 interface RoleFilterProps {
   agents: ValorantAgent[];
@@ -12,6 +15,17 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
   const [selectedRole, setSelectedRole] = useState('all');
   const [hoveredAgent, setHoveredAgent] = useState<ValorantAgent | null>(null);
 
+  const showFullPortraitContainer = () => {
+    const container = document.getElementById('full-portrait-container');
+    if (container?.classList.contains('show')) {
+      container.classList.remove('show');
+    }
+    else {
+      container?.classList.add('show');
+      container?.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const filteredAgents = selectedRole === 'all'
     ? agents
     : agents.filter(agent => agent.role.displayName === selectedRole);
@@ -20,6 +34,7 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
     <div style={{ display: 'flex' }}>
       {/* Left side for full portrait */}
       <div id="full-portrait-container">
+      <button id="exit-button" onClick={showFullPortraitContainer}><LineMdCloseCircle /></button>
         {hoveredAgent && (
           <div id="selected-agent">
             <img
@@ -35,20 +50,22 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
             <ul id="abilities-list">
               {hoveredAgent.abilities.map(ability => (
                 <li key={ability.slot}>
-                  <img
+                  <ImageWithPlaceholder
                     src={ability.displayIcon}
                     width="50"
                     loading='lazy'
+                    placeholderSrc="./public/line-md--loading-loop.svg"
                   />
                   <h4>{ability.displayName}</h4>
                   <p>{ability.description}</p>
                 </li>
               ))}
             </ul>
-            {/* full portait to the right test */}
-            <img
+            {/* full portait to the right */}
+            <ImageWithPlaceholder
               src={hoveredAgent.fullPortrait}
               alt={hoveredAgent.displayName}
+              placeholderSrc="./public/line-md--loading-loop.svg"
               id="full-portrait"
               loading='lazy'/>
           </div>
@@ -56,7 +73,7 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
       </div>
 
       {/* agent select list */}
-      <div>
+      <div id="agents">
         <label className="filter" htmlFor="role-select">Filter by Role: </label>
         <select
           id="role-select"
@@ -71,7 +88,10 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
           {filteredAgents.map(agent => (
             <li
               key={agent.uuid}
-              onClick={() => setHoveredAgent(agent)} // Set picked agent
+              onClick={() => {
+                setHoveredAgent(agent); // Set picked agent
+                showFullPortraitContainer(); // Show full agent container
+              }} 
               // onMouseLeave={() => setHoveredAgent(null)} // Clear picked agent
             >
               <img id="roleIcon" src={agent.role.displayIcon}/>
