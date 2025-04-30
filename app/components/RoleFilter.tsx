@@ -13,7 +13,7 @@ interface RoleFilterProps {
 export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
   const [selectedRole, setSelectedRole] = useState('all');
   const [hoveredAgent, setHoveredAgent] = useState<ValorantAgent | null>(null);
-  let menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const showFullPortraitContainer = () => {
     const container = document.getElementById('full-portrait-container');
