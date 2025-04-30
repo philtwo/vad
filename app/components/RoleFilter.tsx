@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ValorantAgent } from '../types/valorant';
 import ImageWithPlaceholder from './ImageWithPlaceHolder';
 import { LineMdCloseCircle } from './ExitButton';
@@ -13,17 +13,32 @@ interface RoleFilterProps {
 export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
   const [selectedRole, setSelectedRole] = useState('all');
   const [hoveredAgent, setHoveredAgent] = useState<ValorantAgent | null>(null);
+  let menuRef = useRef<HTMLDivElement>(null);
 
   const showFullPortraitContainer = () => {
     const container = document.getElementById('full-portrait-container');
     if (container?.classList.contains('show')) {
-      container.classList.remove('show');
-    }
-    else {
+      container?.classList.remove('show');
+      container?.scrollTo({ top: 0 });
+    } else {
       container?.classList.add('show');
-      container?.scrollTo({ top: 0, behavior: 'smooth' });
+      container?.scrollTo({ top: 0 });
     }
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    const container = menuRef.current;
+    if (container && !container.contains(event.target as Node)) {
+      container.classList.remove('show');
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const filteredAgents = selectedRole === 'all'
     ? agents
@@ -32,7 +47,7 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
   return (
     <div style={{ display: 'flex' }}>
       {/* Left side for full portrait */}
-      <div id="full-portrait-container">
+      <div id="full-portrait-container" ref={menuRef}>
       <button id="exit-button" onClick={showFullPortraitContainer}><LineMdCloseCircle /></button>
         {hoveredAgent && (
           <div id="selected-agent">
@@ -53,24 +68,25 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
                     src={ability.displayIcon}
                     width="50"
                     loading='lazy'
-                    placeholderSrc="./public/line-md--loading-loop.svg"
+                    placeholderSrc="../public/line-md--loading-loop.svg"
                   />
                   <h4>{ability.displayName}</h4>
                   <p>{ability.description}</p>
                 </li>
               ))}
             </ul>
-            {/* full portait to the right */}
-            <ImageWithPlaceholder
-              src={hoveredAgent.fullPortrait}
-              alt={hoveredAgent.displayName}
-              placeholderSrc="./public/line-md--loading-loop.svg"
-              id="full-portrait"
-              loading='lazy'/>
           </div>
         )}
       </div>
-
+      {/* FULL hoveredAgent portrait to the right */}
+      {hoveredAgent && (
+      <ImageWithPlaceholder
+              src={hoveredAgent.fullPortrait}
+              alt={hoveredAgent.displayName}
+              placeholderSrc="../public/line-md--loading-loop.svg"
+              id="full-portrait"
+              loading='lazy'/>
+            )}
       {/* agent select list */}
       <div id="agents">
         <label className="filter" htmlFor="role-select">Filter by Role: </label>
