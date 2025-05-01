@@ -1,7 +1,7 @@
 :root{
   max-width: 1280px;
+  height: 1920px;
   margin: 0 auto;
-  aspect-ratio: auto;
   padding: 2rem;
   text-align: center;
   background-image: url('../public/valorant_background.png');
@@ -11,7 +11,6 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height:auto;
   color: #FFFFFF;
   font-family: monospace;
 }
@@ -63,7 +62,6 @@ hr {
 }
 
 footer {
-  margin: 0 auto;
   width: 100%;
   height: 10vh;
 }
@@ -332,7 +330,7 @@ footer {
     overflow-y: auto;
     display: flex;
     flex-wrap: wrap;
-    margin: 0 10vw;
+    left: 9.5vw;
     z-index: 998;
     width: 80vw;
     max-height: 70vh;
