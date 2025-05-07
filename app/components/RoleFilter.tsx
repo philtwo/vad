@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { ValorantAgent } from '../types/valorant';
-import ImageWithPlaceholder from './ImageWithPlaceHolder';
 import { LineMdCloseCircle } from './ExitButton';
 
 interface RoleFilterProps {
@@ -25,6 +24,12 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
       container?.scrollTo({ top: 0 });
     }
   };
+
+function Loading() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c4.97 0 9 4.03 9 9"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="16;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
+  )
+};
 
   const handleClickOutside = (event: MouseEvent) => {
     const container = menuRef.current;
@@ -64,11 +69,10 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
             <ul id="abilities-list">
               {hoveredAgent.abilities.map(ability => (
                 <li key={ability.slot}>
-                  <ImageWithPlaceholder
+                  <img
                     src={ability.displayIcon}
                     width="50"
                     loading='lazy'
-                    placeholderSrc="../public/line-md--loading-loop.svg"
                   />
                   <h4>{ability.displayName}</h4>
                   <p>{ability.description}</p>
@@ -80,13 +84,14 @@ export default function RoleFilter({ agents, uniqueRoles }: RoleFilterProps) {
       </div>
       {/* FULL hoveredAgent portrait to the right */}
       {hoveredAgent && (
-      <ImageWithPlaceholder
-              src={hoveredAgent.fullPortrait}
-              alt={hoveredAgent.displayName}
-              placeholderSrc="../public/line-md--loading-loop.svg"
-              id="full-portrait"
-              loading='lazy'/>
-            )}
+      <Suspense fallback={<Loading />}>
+      <img
+            src={hoveredAgent.fullPortrait}
+            alt={hoveredAgent.displayName}
+            id="full-portrait"
+            loading='lazy'/>
+      </Suspense>
+      )}
       {/* agent select list */}
       <div id="agents">
         <label className="filter" htmlFor="role-select">Filter by Role: </label>
