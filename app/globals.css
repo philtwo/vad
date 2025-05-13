@@ -335,13 +335,6 @@ footer {
     transition: --color-1 0.2s, --color-2 0.2s, scale 0.1s;
   }
 
-  #display-icon {
-    margin-left: 0;
-    flex-shrink: 0;
-    width: 10vh;
-    height: 10vh;
-  }
-
   #agents-list li:hover{
     --color-1: rgba(174, 176, 184, 0.5);
     --color-2: rgba(1, 60, 107, 0.5);
